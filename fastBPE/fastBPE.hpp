@@ -276,7 +276,9 @@ void find_maxp(vector<pair<int32_t, tp>> &contiguous_counts, tp &maxp,
   }
 }
 
-void getvocab(const char *inputFile1, const char *inputFile2) {
+void getvocab(const char *outputFile, const char *inputFile1, const char *inputFile2) {
+  ofstream out;
+  out.open (outputFile);
   // get vocab
   unordered_map<string, uint32_t> word_count;
   readText(inputFile1, word_count);
@@ -295,11 +297,13 @@ void getvocab(const char *inputFile1, const char *inputFile2) {
 
   // print sorted vocab
   for (auto element : sorted_vocab)
-    cout << element.first << " " << element.second << endl;
+    out << element.first << " " << element.second << endl;
 }
 
-void learnbpe(const uint32_t kNPairs, const char *inputFile1,
+void learnbpe(const uint32_t kNPairs, const char *outputFile, const char *inputFile1,
               const char *inputFile2) {
+  ofstream out;
+  out.open (outputFile);
   // get vocab
   unordered_map<string, uint32_t> word_count;
   readText(inputFile1, word_count);
@@ -333,7 +337,7 @@ void learnbpe(const uint32_t kNPairs, const char *inputFile1,
   for (size_t i = 0; i < kNPairs; i++) {
     // create new token for pair. replace
     auto new_token = int_to_token[max_p.first] + int_to_token[max_p.second];
-    cout << int_to_token[max_p.first] << " " << int_to_token[max_p.second]
+    out << int_to_token[max_p.first] << " " << int_to_token[max_p.second]
          << " " << max_c << endl;
 
     uint32_t new_token_id = int_to_token.size();
