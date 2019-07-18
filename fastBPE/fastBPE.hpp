@@ -60,7 +60,7 @@ void readText(const char *fp, unordered_map<string, uint32_t> &word_count) {
   };
 
   if (string(fp).compare("-") == 0) {
-    for (std::string line; std::getline(std::cin, line);) {
+    for (string line; getline(cin, line);) {
       for(char c: line){
         deal_with_char(c);
       }
@@ -85,7 +85,7 @@ void readText(const char *fp, unordered_map<string, uint32_t> &word_count) {
           word_count.size());
 }
 
-std::pair<size_t, uint64_t> output_or_count(
+pair<size_t, uint64_t> output_or_count(
   unordered_map<string, string> &bpe, size_t size, char *f, char *fo
 ) {
   string cur_word;
@@ -115,7 +115,7 @@ std::pair<size_t, uint64_t> output_or_count(
       cur_word.push_back(cur_char);
     }
   }
-  return std::make_pair(charOut, total);
+  return make_pair(charOut, total);
 }
 
 void outputText(const char *fpo, const char *fp,
@@ -678,10 +678,8 @@ public:
 
 void applybpe_stream(const char *codesPath, const char *vocabPath) {
   BPEApplyer applyer(codesPath, vocabPath);
-  std::string line;
-  while(std::getline(std::cin, line)) {
-    std::cout << applyer.apply(line) << std::endl;
-  }
+  string line;
+  while(getline(cin, line)) { cout << applyer.apply(line) << endl; }
 }
 
 };
