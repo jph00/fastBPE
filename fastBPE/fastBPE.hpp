@@ -1,3 +1,4 @@
+#pragma GCC optimize ("fast")
 #pragma once
 
 #include <algorithm>
